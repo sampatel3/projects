@@ -1,0 +1,9 @@
+﻿user_id,consent_id,consent_granted_date,consent_status
+1,101,01/01/2023,active
+2,102,01/01/2023,active
+3,103,01/01/2023,revoked
+4,104,01/01/2023,active
+5,105,01/01/2023,active
+6,106,01/01/2023,active
+7,107,01/01/2023,active
+8,108,01/01/2023,active

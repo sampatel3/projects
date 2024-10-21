@@ -1,0 +1,51 @@
+services:
+  postgres_db:
+    image: postgres:14
+    container_name: postgres_database
+    environment:
+      POSTGRES_USER: sampatel3
+      POSTGRES_PASSWORD: Tulegatan37
+      POSTGRES_DB: tarabutdb
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - app-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U sampatel3 -d tarabutdb"]
+      interval: 5s
+      retries: 5
+      start_period: 5s
+      timeout: 5s
+
+  reader:
+    build:
+      context: ./reader
+      dockerfile: Dockerfile_reader
+    container_name: file_reader
+    depends_on:
+      postgres_db:
+        condition: service_healthy
+    networks:
+      - app-network
+
+  app:
+    build:
+      context: ./app
+      dockerfile: Dockerfile_app
+    container_name: streamlit_app
+    ports:
+      - "8501:8501"
+    depends_on:
+      postgres_db:
+        condition: service_healthy
+    networks:
+      - app-network
+      
+
+volumes:
+  postgres_data:
+
+networks:
+  app-network:
