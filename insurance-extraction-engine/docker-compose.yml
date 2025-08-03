@@ -1,0 +1,162 @@
+version: '3.8'
+
+services:
+  # PDF Renderer Service
+  pdf-renderer:
+    build: ./services/pdf-renderer
+    container_name: pdf-renderer-service
+    ports:
+      - "8001:8000"
+    volumes:
+      - ./data:/app/data
+      - ./outputs:/app/outputs
+    environment:
+      - SERVICE_NAME=pdf-renderer
+      - LOG_LEVEL=INFO
+    networks:
+      - insurance-network
+
+  # PaddleOCR Service
+  paddleocr:
+    build: ./services/paddleocr
+    container_name: paddleocr-service
+    ports:
+      - "8002:8000"
+    volumes:
+      - ./data:/app/data
+      - ./outputs:/app/outputs
+    environment:
+      - SERVICE_NAME=paddleocr
+      - LOG_LEVEL=INFO
+    networks:
+      - insurance-network
+
+  # Template Matcher Service
+  template-matcher:
+    build: ./services/template-matcher
+    container_name: template-matcher-service
+    ports:
+      - "8003:8000"
+    volumes:
+      - ./data:/app/data
+      - ./outputs:/app/outputs
+    environment:
+      - SERVICE_NAME=template-matcher
+      - LOG_LEVEL=INFO
+    networks:
+      - insurance-network
+
+  # Rule-based Parser Service
+  rule-parser:
+    build: ./services/rule-parser
+    container_name: rule-parser-service
+    ports:
+      - "8004:8000"
+    volumes:
+      - ./data:/app/data
+      - ./outputs:/app/outputs
+    environment:
+      - SERVICE_NAME=rule-parser
+      - LOG_LEVEL=INFO
+    networks:
+      - insurance-network
+
+  # LayoutLMv3 Service
+  layoutlm:
+    build: ./services/layoutlm
+    container_name: layoutlm-service
+    ports:
+      - "8005:8000"
+    volumes:
+      - ./models:/app/models
+      - ./data:/app/data
+      - ./outputs:/app/outputs
+    environment:
+      - SERVICE_NAME=layoutlm
+      - LOG_LEVEL=INFO
+      - TRANSFORMERS_CACHE=/app/models
+    networks:
+      - insurance-network
+
+  # Normalizer Service
+  normalizer:
+    build: ./services/normalizer
+    container_name: normalizer-service
+    ports:
+      - "8006:8000"
+    volumes:
+      - ./data:/app/data
+      - ./outputs:/app/outputs
+    environment:
+      - SERVICE_NAME=normalizer
+      - LOG_LEVEL=INFO
+    networks:
+      - insurance-network
+
+  # Storage Service
+  storage:
+    build: ./services/storage
+    container_name: storage-service
+    ports:
+      - "8007:8000"
+    volumes:
+      - ./outputs:/app/outputs
+      - ./data:/app/data
+    environment:
+      - SERVICE_NAME=storage
+      - LOG_LEVEL=INFO
+    networks:
+      - insurance-network
+
+  # Logger Service
+  logger:
+    build: ./services/logger
+    container_name: logger-service
+    ports:
+      - "8008:8000"
+    volumes:
+      - ./outputs/logs:/app/logs
+    environment:
+      - SERVICE_NAME=logger
+      - LOG_LEVEL=INFO
+    networks:
+      - insurance-network
+
+  # Streamlit Web Application
+  webapp:
+    build: ./webapp
+    container_name: webapp-streamlit
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./data:/app/data
+      - ./outputs:/app/outputs
+    environment:
+      - PDF_RENDERER_URL=http://pdf-renderer:8000
+      - PADDLEOCR_URL=http://paddleocr:8000
+      - TEMPLATE_MATCHER_URL=http://template-matcher:8000
+      - RULE_PARSER_URL=http://rule-parser:8000
+      - LAYOUTLM_URL=http://layoutlm:8000
+      - NORMALIZER_URL=http://normalizer:8000
+      - STORAGE_URL=http://storage:8000
+      - LOGGER_URL=http://logger:8000
+    depends_on:
+      - pdf-renderer
+      - paddleocr
+      - template-matcher
+      - rule-parser
+      - layoutlm
+      - normalizer
+      - storage
+      - logger
+    networks:
+      - insurance-network
+
+networks:
+  insurance-network:
+    driver: bridge
+
+volumes:
+  models:
+  outputs:
+  data:
