@@ -1,0 +1,236 @@
+version: 2
+models:
+  - name: stg_ictm_acc
+    description: Auto-generated schema for stg_ictm_acc.
+    columns:
+      - name: account_number
+        description: account_number
+        tests:
+          - not_null
+      - name: maturity_date
+        description: maturity_date
+
+  - name: stg_sttm_customer
+    description: Auto-generated schema for stg_sttm_customer.
+    columns:
+      - name: customer_id
+        description: customer_id
+        tests:
+          - not_null
+      - name: power_of_attorney
+        description: power_of_attorney
+      - name: salary_transfer
+        description: salary_transfer
+      - name: type
+        description: type
+      - name: account_type
+        description: account_type
+      - name: customer_account_type
+        description: customer_account_type
+      - name: account_role
+        description: account_role
+      - name: family_name
+        description: family_name
+      - name: customer_name1
+        description: customer_name1
+      - name: nationality
+        description: nationality
+      - name: salutation
+        description: salutation
+      - name: preferred_language
+        description: preferred_language
+      - name: last_updated
+        description: last_updated
+        tests:
+          - not_null
+      - name: short_address
+        description: short_address
+      - name: address_line_1
+        description: address_line_1
+      - name: address_city
+        description: address_city
+      - name: address_state
+        description: address_state
+      - name: address_postcode
+        description: address_postcode
+      - name: address_country
+        description: address_country
+      - name: address_type
+        description: address_type
+      - name: deceased
+        description: deceased
+
+  - name: stg_sttm_account_class
+    description: Auto-generated schema for stg_sttm_account_class.
+    columns:
+      - name: product_id
+        description: product_id
+        tests:
+          - not_null
+      - name: type
+        description: type
+      - name: description
+        description: description
+      - name: islamic
+        description: islamic
+
+  - name: stg_sttm_collateral_lmcust
+    description: Auto-generated schema for stg_sttm_collateral_lmcust.
+    columns:
+      - name: account_number
+        description: account_number
+        tests:
+          - not_null
+      - name: closed
+        description: closed
+      - name: expiry_date
+        description: expiry_date
+      - name: max_overdraft_limit
+        description: max_overdraft_limit
+
+  - name: stg_sttm_cust_profession_custom
+    description: Auto-generated schema for stg_sttm_cust_profession_custom.
+    columns:
+      - name: customer_id
+        description: customer_id
+        tests:
+          - not_null
+      - name: date_of_joining
+        description: date_of_joining
+
+  - name: sttg_sttm_account_class
+    description: Auto-generated schema for sttg_sttm_account_class.
+    columns:
+      - name: product_id
+        description: product_id
+        tests:
+          - not_null
+      - name: type
+        description: type
+      - name: description
+        description: description
+      - name: islamic
+        description: islamic
+
+  - name: stg_sttm_cust_personal
+    description: Auto-generated schema for stg_sttm_cust_personal.
+    columns:
+      - name: customer_id
+        description: customer_id
+        tests:
+          - not_null
+      - name: birthdate
+        description: birthdate
+      - name: phone_number
+        description: phone_number
+      - name: email_address
+        description: email_address
+      - name: personal_number
+        description: personal_number
+      - name: document_expiry_date
+        description: document_expiry_date
+      - name: document_type
+        description: document_type
+
+  - name: stg_sttm_ac_linked_entities
+    description: Auto-generated schema for stg_sttm_ac_linked_entities.
+    columns:
+      - name: customer_id
+        description: customer_id
+        # tests:
+        #   - not_null
+      - name: joint_holder
+        description: joint_holder
+      - name: account_number
+        description: account_number
+        tests:
+          - not_null
+
+  - name: stg_sttm_cust_domestic
+    description: Auto-generated schema for stg_sttm_cust_domestic.
+    columns:
+      - name: customer_id
+        description: customer_id
+        tests:
+          - not_null
+      - name: status
+        description: status
+
+  - name: stg_sttm_cust_professional
+    description: Auto-generated schema for stg_sttm_cust_professional.
+    columns:
+      - name: customer_id
+        description: customer_id
+        tests:
+          - not_null
+      - name: employer_name
+        description: employer_name
+      - name: income
+        description: income
+
+  - name: stg_sttm_cust_account
+    description: Auto-generated schema for stg_sttm_cust_account.
+    columns:
+      - name: account_number
+        description: account_number
+        tests:
+          - not_null
+      - name: account_holder_name
+        description: account_holder_name
+      - name: account_subtype
+        description: account_subtype
+      - name: acc_status
+        description: acc_status
+      - name: status_update_datetime
+        description: status_update_datetime
+      - name: account_iban
+        description: account_iban
+      - name: opening_date
+        description: opening_date
+      - name: currency
+        description: currency
+      - name: product_id
+        description: product_id
+        tests:
+          - not_null
+      - name: customer_id
+        description: customer_id
+        tests:
+          - not_null
+      - name: total_balance
+        description: total_balance
+      - name: date_last_dr
+        description: date_last_dr
+      - name: date_last_cr
+        description: date_last_cr
+      - name: record_stat
+        description: record_stat
+      - name: ac_stat_dormant
+        description: ac_stat_dormant
+      - name: salary_account
+        description: salary_account
+
+  - name: stg_sttm_cust_personal_custom
+    description: Auto-generated schema for stg_sttm_cust_personal_custom.
+    columns:
+      - name: customer_id
+        description: customer_id
+        tests:
+          - not_null
+      - name: source_income_wealth
+        description: source_income_wealth
+      - name: profession
+        description: profession
+
+  - name: stg_sttm_account_lmcust
+    description: Auto-generated schema for stg_sttm_account_lmcust.
+    columns:
+      - name: account_number
+        description: account_number
+        tests:
+          - not_null
+      - name: record_stat
+        description: record_stat
+      - name: currency
+        description: currency
+

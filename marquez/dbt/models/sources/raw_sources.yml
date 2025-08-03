@@ -1,0 +1,20 @@
+version: 2
+sources:
+  - name: fcubs
+    database: marquezdb
+    schema: fcubs # change to fcubs once DMS is set up to write to it
+    tables:
+      - name: ictm_acc
+      - name: ictm_pr_int_udevals
+      - name: sttm_ac_linked_entities
+      - name: sttm_account_class
+      - name: sttm_account_lmcust
+      - name: sttm_collateral_lmcust
+      - name: sttm_cust_account
+      - name: sttm_cust_domestic
+      - name: sttm_cust_personal
+      - name: sttm_cust_personal_custom
+      - name: sttm_cust_profession_custom
+      - name: sttm_cust_professional
+      - name: sttm_customer
+      - name: sttm_products

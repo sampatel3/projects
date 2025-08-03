@@ -1,0 +1,22 @@
+name: marquez_local
+version: 1.0
+
+profile: marquez_local
+
+model-paths: ["models"]
+
+models:
+  marquez_local:  
+
+    staging:
+      +materialized: view
+      +schema: staging  # This will go into the 'staging' schema
+
+    marts:
+      +materialized: view
+      +schema: api  # This will go into the 'api' schema
+
+on-run-end:
+  - "GRANT USAGE ON SCHEMA openfinance_api TO web_anon"
+  - "GRANT SELECT ON ALL TABLES IN SCHEMA openfinance_api TO web_anon"
+  - "GRANT SELECT ON ALL SEQUENCES IN SCHEMA openfinance_api TO web_anon"

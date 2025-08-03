@@ -1,0 +1,6 @@
+dbt run --profiles-dir ./.dbt
+
+dbt compile --profiles-dir ./.dbt
+
+because for testing we are storing the profiles.yml file in the dbt folder.
+once testing is complete, remove profiles.yml from .dbt folder and delete the .dbt hidden folder
