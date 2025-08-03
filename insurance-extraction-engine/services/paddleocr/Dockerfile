@@ -8,6 +8,8 @@ RUN apt-get update && apt-get install -y \
     libxrender-dev \
     libgomp1 \
     libgcc-s1 \
+    libgl1-mesa-glx \
+    libglib2.0-0 \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app

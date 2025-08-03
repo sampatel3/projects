@@ -11,7 +11,7 @@ if ! command -v docker &> /dev/null; then
     exit 1
 fi
 
-if ! command -v docker-compose &> /dev/null; then
+if ! command -v sudo docker-compose &> /dev/null; then
     echo "❌ Docker Compose is not installed. Please install Docker Compose first."
     exit 1
 fi
@@ -27,7 +27,7 @@ chmod -R 755 data outputs models
 
 # Build and start services
 echo "🏗️  Building and starting services..."
-docker-compose up --build -d
+sudo docker-compose up --build -d
 
 # Wait for services to start
 echo "⏳ Waiting for services to start..."
@@ -46,7 +46,7 @@ for service in "${services[@]}"; do
     
     echo -n "  Checking $name... "
     
-    if curl -s "http://localhost:$port/health" > /dev/null; then
+    if sudo curl -s "http://localhost:$port/health" > /dev/null; then
         echo "✅ Healthy"
     else
         echo "❌ Not responding"
@@ -73,12 +73,12 @@ if [ "$all_healthy" = true ]; then
     echo "📖 For more information, see README.md"
 else
     echo "⚠️  Some services are not responding. Check logs with:"
-    echo "   docker-compose logs <service-name>"
+    echo "   sudo docker-compose logs <service-name>"
     echo ""
     echo "🔧 To restart services:"
-    echo "   docker-compose restart"
+    echo "   sudo docker-compose restart"
 fi
 
 echo ""
 echo "🛑 To stop all services:"
-echo "   docker-compose down"
+echo "   sudo docker-compose down"
